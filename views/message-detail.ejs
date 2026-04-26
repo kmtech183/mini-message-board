@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Message Details</h1>
+      <% if(message){ %>
+            <div class="message-detail">
+                <div class="detail-field">
+                    <div class="detail-label">From:</div>
+                    <div class="detail-value"><%= message.user %></div>
+                </div>
+                
+                <div class="detail-field">
+                    <div class="detail-label">Posted on:</div>
+                    <div class="detail-value"><%= message.added.toLocaleString() %></div>
+                </div>
+                
+                <div class="detail-field">
+                    <div class="detail-label">Message:</div>
+                    <div class="message-content"><%= message.text %></div>
+                </div>
+            </div>
+        <% } else {%>
+             <p>Message not found.</p>
+        <% } %>
+          <a href="/" class="back-button">← Back to All Messages</a>
+    </div>
+  </body>
+</html>
