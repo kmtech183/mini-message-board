@@ -5,6 +5,11 @@ const PORT = process.env.PORT || 3000;
 
 const indexRouter = require("./routes/index.js");
 
+app.use((req, res, next) => {
+  console.log(`Request received: ${req.method} ${req.url}`);
+  next();
+});
+
 //set engine view
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
