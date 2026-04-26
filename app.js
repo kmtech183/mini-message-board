@@ -5,11 +5,6 @@ const PORT = process.env.PORT || 3000;
 
 const indexRouter = require("./routes/index.js");
 
-app.use((req, res, next) => {
-  console.log(`Request received: ${req.method} ${req.url}`);
-  next();
-});
-
 //set engine view
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -20,6 +15,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //Routes
 app.use("/", indexRouter);
+
+app.use((req, res, next) => {
+  console.log(`Request received: ${req.method} ${req.url}`);
+  next();
+});
 
 // 404 handler (no route matched)
 app.use((req, res) => {
