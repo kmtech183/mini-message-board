@@ -1,60 +1,18 @@
 const { Router } = require("express");
 const indexRouter = Router();
-
-const messages = [
-  {
-    id: 1,
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date(),
-  },
-  {
-    id: 2,
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date(),
-  },
-];
+const messages = require("../models/messages.js");
+const messageController = require("../controllers/messageController.js");
 
 // GET home page
-indexRouter.get("/", (req, res) => {
-  res.render("index", { title: "Mini Message Board", messages: messages });
-});
+indexRouter.get("/", messageController.getAllMessages);
 
 // GET new message form
-indexRouter.get("/new", (req, res) => {
-  res.render("form", { title: "Create New Message", messages: messages });
-});
+indexRouter.get("/new", messageController.getMessageForm);
 
 // Post new message form
-indexRouter.post("/new", (req, res) => {
-  // console.log(req.body);
-  const { messageUser, messageText } = req.body;
-
-  const newMessage = {
-    id: Date.now(),
-    text: messageText,
-    user: messageUser,
-    added: new Date(),
-  };
-
-  messages.push(newMessage);
-  res.redirect("/");
-});
+indexRouter.post("/new", messageController.createMessage);
 
 // GET individual message detail
-indexRouter.get("/message/:id", (req, res) => {
-  // console.log(req.body);
-  const messageId = Number(req.params.id);
-  const message = messages.find((msg) => msg.id === messageId);
-
-  if (!message) {
-    return res.status(400).render("error", { message: "Message not found" });
-  }
-  res.render("message-detail", {
-    title: "Message Details",
-    message: message,
-  });
-});
+indexRouter.get("/message/:id", messageController.getMessageDetail);
 
 module.exports = indexRouter;
