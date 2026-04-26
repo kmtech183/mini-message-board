@@ -23,7 +23,7 @@ indexRouter.get("/", (req, res) => {
 
 // GET new message form
 indexRouter.get("/new", (req, res) => {
-  res.render("form", { title: "New Message", messages: messages });
+  res.render("form", { title: "Create New Message", messages: messages });
 });
 
 // Post new message form
@@ -49,7 +49,7 @@ indexRouter.get("/message/:id", (req, res) => {
   const message = messages.find((msg) => msg.id === messageId);
 
   if (!message) {
-    return res.status(404).send("Message not found");
+    return res.status(400).render("error", { message: "Message not found" });
   }
   res.render("message-detail", {
     title: "Message Details",
