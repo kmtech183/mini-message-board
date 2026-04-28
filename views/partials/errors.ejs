@@ -1,0 +1,10 @@
+<% if (locals.errors && errors.length > 0) { %>
+  <div class="errors" style="background: #ffebee; border-left: 4px solid #f44336; padding: 10px; margin: 20px 0;">
+    <strong>Please fix the following errors:</strong>
+    <ul>
+      <% errors.forEach(function(error) { %>
+        <li><%= error.msg %></li>
+      <% }); %>
+    </ul>
+  </div>
+<% } %>

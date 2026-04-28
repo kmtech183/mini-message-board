@@ -10,7 +10,11 @@ indexRouter.get("/", messageController.getAllMessages);
 indexRouter.get("/new", messageController.getMessageForm);
 
 // Post new message form
-indexRouter.post("/new", messageController.createMessage);
+indexRouter.post(
+  "/new",
+  messageController.validateUser,
+  messageController.createMessage,
+);
 
 // GET individual message detail
 indexRouter.get("/message/:id", messageController.getMessageDetail);
